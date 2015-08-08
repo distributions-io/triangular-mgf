@@ -12,7 +12,7 @@ The [moment-generating function](https://en.wikipedia.org/wiki/Moment-generating
 	<br>
 </div>
 
-where `a` is the lower limit and `b` is the upper limit and `c` is the mode.
+where `a` is the lower limit, `b` is the upper limit and `c` is the mode of the distribution. The parameters must satisfy `b > a ` and `a <= b <= c`.
 
 ## Installation
 
