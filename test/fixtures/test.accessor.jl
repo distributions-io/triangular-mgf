@@ -1,12 +1,12 @@
 using Distributions
 using JSON
 
-a = 0
+a = -2
 b = 1
-c = 0.5
+c = 0.4
 d = TriangularDist( a,b,c )
 
-x = linspace( .5, -100, 100 )
+x = linspace( -5, 5, 100 )
 
 dmgf(t) = mgf(d, t )
 y = map( dmgf, x )

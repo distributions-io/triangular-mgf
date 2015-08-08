@@ -7,7 +7,7 @@ Moment-Generating Function
 The [moment-generating function](https://en.wikipedia.org/wiki/Moment-generating_function) for a [triangular](https://en.wikipedia.org/wiki/triangular_distribution) random variable is
 
 <div class="equation" align="center" data-raw-text="
-    M_X(t) := \mathbb{E}\!\left[e^{tX}\right]" data-equation="eq:mgf_function">
+    M_X(t) := \mathbb{E}\!\left[e^{tX}\right] =  	2\frac{(b\!-\!c)e^{at}\!-\!(b\!-\!a)e^{ct}\!+\!(c\!-\!a)e^{bt}} {(b-a)(c-a)(b-c)t^2}" data-equation="eq:mgf_function">
 	<img src="" alt="Moment-generating function (MGF) for a triangular distribution.">
 	<br>
 </div>
@@ -41,18 +41,18 @@ var matrix = require( 'dstructs-matrix' ),
 	i;
 
 out = mgf( 1 );
-// returns
+// returns ~1.683
 
 out = mgf( -1 );
-// returns 0
+// returns ~0.619
 
 t = [ 0, 0.5, 1, 1.5, 2, 2.5 ];
 out = mgf( t );
-// returns [...]
+// returns [ 1, ~1.291, ~1.683, ~2.218, ~2.952, ~3.969 ]
 
 t = new Int8Array( t );
 out = mgf( t );
-// returns Float64Array( [...] )
+// returns Float64Array( [1,1,~1.683,~1.683,~2.952,~2.952] )
 
 t = new Float32Array( 6 );
 for ( i = 0; i < 6; i++ ) {
@@ -67,9 +67,9 @@ mat = matrix( t, [3,2], 'float32' );
 
 out = mgf( mat );
 /*
-	[
-
-	   ]
+	[  1     ~1.291
+      ~1.683 ~2.218
+      ~2.952 ~3.969 ]
 */
 ```
 
@@ -77,7 +77,7 @@ The function accepts the following `options`:
 
 *	__a__: lower limit. Default: `0`.
 *	__b__: upper limit. Default: `1`.
-*	__c__: mode. Default: `0.5`.
+*	__c__: mode. Default: `( a + b ) / 2`.
 * 	__accessor__: accessor `function` for accessing `array` values.
 * 	__dtype__: output [`typed array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) or [`matrix`](https://github.com/dstructs/matrix) data type. Default: `float64`.
 *	__copy__: `boolean` indicating if the `function` should return a new data structure. Default: `true`.
@@ -90,11 +90,11 @@ A [triangular](https://en.wikipedia.org/wiki/triangular_distribution) distributi
 var t = [ 0, 0.5, 1, 1.5, 2, 2.5 ];
 
 var out = mgf( t, {
-	'a': 3,
-	'b': 2,
-	'c': 6
+	'a': 1,
+	'b': 6,
+	'c': 2
 });
-// returns [...]
+// returns [ 1, ~5.236, ~37.736, ~356.47, ~4062.784, ~52293.185 ]
 ```
 
 For non-numeric `arrays`, provide an accessor `function` for accessing `array` values.
@@ -116,7 +116,7 @@ function getValue( d, i ) {
 var out = mgf( data, {
 	'accessor': getValue
 });
-// returns [...]
+// returns [ 1, ~1.291, ~1.683, ~2.218, ~2.952, ~3.969 ]
 ```
 
 
@@ -138,12 +138,12 @@ var out = mgf( data, {
 });
 /*
 	[
-		{'x':[0,]},
-		{'x':[1,]},
-		{'x':[2,]},
-		{'x':[3,]},
-		{'x':[4,]},
-		{'x':[5,]}
+		{'x':[0,1]},
+		{'x':[1,~1.291]},
+		{'x':[2,~1.683]},
+		{'x':[3,~2.218]},
+		{'x':[4,~2.952]},
+		{'x':[5,~3.969]}
 	]
 */
 
@@ -161,13 +161,13 @@ t = new Int8Array( [0,1,2,3,4] );
 out = mgf( t, {
 	'dtype': 'int32'
 });
-// returns Int32Array( [...] )
+// returns Int32Array( [1,1,2,5,10] )
 
 // Works for plain arrays, as well...
-out = mgf( [0,0.5,1,1.5,2], {
+out = mgf( [0,1,2,3,4], {
 	'dtype': 'uint8'
 });
-// returns Uint8Array( [...] )
+// returns Uint8Array( [1,1,2,5,10] )
 ```
 
 By default, the function returns a new data structure. To mutate the input data structure (e.g., when input values can be discarded or when optimizing memory usage), set the `copy` option to `false`.
@@ -179,12 +179,12 @@ var bool,
 	t,
 	i;
 
-t = [ 0, 0.5, 1, 1.5, 2 ];
+t = [ 0, 0.5, 1, 1.5, 2, 2.5 ];
 
 out = mgf( t, {
 	'copy': false
 });
-// returns [...]
+// returns [ 1, ~1.291, ~1.683, ~2.218, ~2.952, ~3.969 ]
 
 bool = ( t === out );
 // returns true
@@ -204,9 +204,9 @@ out = mgf( mat, {
 	'copy': false
 });
 /*
-	[
-
-	   ]
+	[  1     ~1.291
+      ~1.683 ~2.218
+      ~2.952 ~3.969 ]
 */
 
 bool = ( mat === out );

@@ -1,9 +1,9 @@
 using Distributions
 using JSON
 
-a = 0
-b = 1
-c = 0.5
+a = 3
+b = 6
+c = 5
 d = TriangularDist( a,b,c )
 
 x = [ -5, -2.5, 0, 2.5, 5 ]

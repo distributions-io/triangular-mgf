@@ -6,7 +6,7 @@ b = 1
 c = 0.5
 d = TriangularDist( a,b,c )
 
-x = linspace( 1, 0, 25 )
+x = linspace( 0, 1, 25 )
 
 dmgf(t) = mgf(d, t )
 y = map( dmgf, x )
