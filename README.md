@@ -2,13 +2,13 @@ Moment-Generating Function
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> [triangular](https://en.wikipedia.org/wiki/triangular_distribution) distribution moment-generating function (MGF).
+> [Triangular](https://en.wikipedia.org/wiki/triangular_distribution) distribution moment-generating function (MGF).
 
 The [moment-generating function](https://en.wikipedia.org/wiki/Moment-generating_function) for a [triangular](https://en.wikipedia.org/wiki/triangular_distribution) random variable is
 
 <div class="equation" align="center" data-raw-text="
     M_X(t) := \mathbb{E}\!\left[e^{tX}\right] =  	2\frac{(b\!-\!c)e^{at}\!-\!(b\!-\!a)e^{ct}\!+\!(c\!-\!a)e^{bt}} {(b-a)(c-a)(b-c)t^2}" data-equation="eq:mgf_function">
-	<img src="" alt="Moment-generating function (MGF) for a triangular distribution.">
+	<img src="https://cdn.rawgit.com/distributions-io/triangular-mgf/58d571b26689f09d4d02dba374f92d1b577b4b8d/docs/img/eqn.svg" alt="Moment-generating function (MGF) for a triangular distribution.">
 	<br>
 </div>
 
